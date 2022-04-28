@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 The Chromium OS Authors. All rights reserved.
+     Use of this source code is governed by a BSD-style license that can be
+     found in the LICENSE file.
+-->
+<resources>
+    <!-- DO NOT TRANSLATE -->
+    <string name="main_activity_name">Main Activity</string>
+    <string name="edit_text_activity_name">Edit Text Activity</string>
+    <string name="live_region_activity_name">Live Region Activity</string>
+</resources>

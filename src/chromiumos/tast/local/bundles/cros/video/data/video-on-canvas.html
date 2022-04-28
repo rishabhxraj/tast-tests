@@ -1,0 +1,41 @@
+<html>
+<body>
+  <h1>Video</h1>
+  <video id="video" height="180" autoplay muted style="border: 1px solid;">
+  </video>
+  <h1>Canvas</h1>
+  <canvas id="canvas" width="320" height="180" style="border: 1px solid;">
+  </canvas>
+</body>
+<script type="text/javascript">
+var ctx;
+
+// Sets the size of the canvas to width x height and obtains a 2d context for
+// later use.
+function initializeCanvas(width, height) {
+  const canvas = document.getElementById('canvas');
+  canvas.width = width;
+  canvas.height = height;
+  ctx = canvas.getContext('2d', {alpha: false});
+}
+
+// Returns a Promise that resolves when the first frame of videoSourcePath is
+// drawn on the canvas without scaling.
+function drawFirstFrameOnCanvas(videoSourcePath) {
+  return new Promise((resolve, reject) => {
+    const video = document.getElementById('video');
+    video.src = videoSourcePath;
+    video.requestVideoFrameCallback((_) => {
+      const canvas = document.getElementById('canvas');
+      ctx.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+      resolve();
+    });
+  });
+}
+
+// Returns the contents of the canvas as a PNG image in data URI format.
+function getCanvasAsPNG() {
+  return document.getElementById('canvas').toDataURL('image/png');
+}
+</script>
+</html>

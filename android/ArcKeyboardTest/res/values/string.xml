@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+   Copyright 2020 The Chromium OS Authors. All rights reserved.
+   Use of this source code is governed by a BSD-style license that can be
+   found in the LICENSE file.
+-->
+<resources>
+    <string name="default_text">hello</string>
+    <string name="focus_switch_button">Focus switch</string>
+    <string name="hide_and_focus_switch_button">Hide and focus switch</string>
+    <string name="hide_button">Hide keyboard</string>
+    <string name="type_null_text">TYPE_NULL</string>
+</resources>

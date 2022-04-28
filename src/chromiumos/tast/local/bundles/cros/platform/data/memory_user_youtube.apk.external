@@ -1,0 +1,5 @@
+{
+  "url": "gs://chromeos-test-assets-private/tast/crosint/platform/memory_user_youtube_20201117.apk",
+  "size": 81947232,
+  "sha256sum": "c9ac0be8ffd32cdb185152a45d87b5e8637a07f3fa2b704255b20153a72c71e8"
+}

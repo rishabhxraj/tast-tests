@@ -1,0 +1,200 @@
+# Copyright 2019 The Chromium OS Authors. All rights reserved.
+# Use of this source code is governed by a BSD-style license that can be
+# found in the LICENSE file.
+
+import("//common-mk/pkg_config.gni")
+
+executable("arc.Suspend.readclocks") {
+  cflags = [
+    "-g",
+  ]
+  ldflags = [
+    "-static",  # So we can run inside ARCVM without worrying about libraries.
+  ]
+  sources = [
+    "arc.Suspend.readclocks.c",
+  ]
+}
+
+executable("crash.Seccomp.brk") {
+  sources = [
+    "crash.Seccomp.brk.c"
+  ]
+}
+
+executable("graphics.GBM.gbmtest") {
+  pkg_deps = [
+    "gbm",
+    "libdrm",
+    "libchrome",
+  ]
+
+  libs = [
+    "gtest",
+    "pthread",
+  ]
+  sources = [
+    "graphics.GBM.gbmtest.cc",
+  ]
+}
+
+executable("hardware.VerifyRemoteSleep.timersignal") {
+  cflags = [
+    "-std=gnu99",
+  ]
+  libs = [
+    "rt",
+  ]
+  sources = [
+    "hardware.VerifyRemoteSleep.timersignal.c",
+  ]
+}
+
+executable("kernel.PerfCallgraph.graph") {
+  cflags = [
+    "-O2",
+    "-g",
+    "-std=c99",
+  ]
+  sources = [
+    "kernel.PerfCallgraph.graph.c",
+  ]
+}
+
+executable("multivm.Lifecycle.crostini") {
+  cflags = [
+    "-g",
+  ]
+  ldflags = [
+    "-static",  # So we can run inside Crostini without worrying about libraries.
+  ]
+  sources = [
+    "multivm.Lifecycle.crostini.c",
+  ]
+}
+
+executable("platform.UserCrash.crasher") {
+  sources = [
+    "platform.UserCrash.crasher.bomb.cc",
+    "platform.UserCrash.crasher.crasher.cc",
+  ]
+}
+
+action("platform.UserCrash.crasher.sym") {
+  out_file = "${root_build_dir}/platform.UserCrash.crasher.sym"
+
+  # This is the output by the :platform.UserCrash.crasher executable rule.
+  # GN cannot calculate the output filename of an executable rule at configuration time.
+  in_file = "${root_build_dir}/platform.UserCrash.crasher"
+  inputs = [
+    in_file,
+  ]
+  outputs = [
+    out_file,
+  ]
+  script = "dump_syms.py"
+  args = [
+    in_file,
+    out_file,
+  ]
+  deps = [
+    ":platform.UserCrash.crasher",
+  ]
+}
+
+executable("security.AltSyscall.adjtimex") {
+  sources = [
+    "security.AltSyscall.adjtimex.c",
+  ]
+}
+
+executable("security.AltSyscall.alt_syscall") {
+  sources = [
+    "security.AltSyscall.alt_syscall.c",
+  ]
+}
+
+executable("security.AltSyscall.clock_adjtime") {
+  sources = [
+    "security.AltSyscall.clock_adjtime.c",
+  ]
+}
+
+executable("security.AltSyscall.mmap") {
+  sources = [
+    "security.AltSyscall.mmap.c",
+  ]
+}
+
+executable("security.AltSyscall.read") {
+  sources = [
+    "security.AltSyscall.read.c",
+  ]
+}
+
+executable("security.Minijail.staticbashexec") {
+  ldflags = [ "-static" ]
+  sources = [
+    "security.Minijail.staticbashexec.c",
+  ]
+}
+
+executable("security.MinijailSeccomp.fail") {
+  sources = [
+    "security.MinijailSeccomp.fail.c",
+  ]
+}
+
+executable("security.MinijailSeccomp.ok") {
+  sources = [
+    "security.MinijailSeccomp.ok.c",
+  ]
+}
+
+executable("security.MinijailSeccomp.open") {
+  sources = [
+    "security.MinijailSeccomp.open.c",
+  ]
+}
+
+executable("security.PtraceProcess.sleeper") {
+  sources = [
+    "security.PtraceProcess.sleeper.c",
+  ]
+}
+
+executable("security.PtraceThread.thread-prctl") {
+  sources = [
+    "security.PtraceThread.thread-prctl.c",
+  ]
+  libs = [ "pthread" ]
+}
+
+group("all") {
+  deps = [
+    ":crash.Seccomp.brk",
+    ":graphics.GBM.gbmtest",
+    ":hardware.VerifyRemoteSleep.timersignal",
+    ":kernel.PerfCallgraph.graph",
+    ":platform.UserCrash.crasher",
+    ":platform.UserCrash.crasher.sym",
+    ":security.AltSyscall.adjtimex",
+    ":security.AltSyscall.alt_syscall",
+    ":security.AltSyscall.clock_adjtime",
+    ":security.AltSyscall.mmap",
+    ":security.AltSyscall.read",
+    ":security.MinijailSeccomp.fail",
+    ":security.MinijailSeccomp.ok",
+    ":security.MinijailSeccomp.open",
+    ":security.PtraceProcess.sleeper",
+    ":security.PtraceThread.thread-prctl",
+  ]
+  # Sanitizer builds do not support static linking.
+  if (!(use.asan || use.msan || use.ubsan)) {
+    deps += [
+      ":arc.Suspend.readclocks",
+      ":multivm.Lifecycle.crostini",
+      ":security.Minijail.staticbashexec",
+    ]
+  }
+}

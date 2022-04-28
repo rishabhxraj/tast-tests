@@ -1,0 +1,26 @@
+# Visual Studio Code
+/.vscode/
+/src/.vscode/
+
+# Go packages, e.g. when Visual Studio Code is run from the base folder, not src
+/pkg/
+
+# Emacs.
+*~
+
+# Vim
+*.swp
+
+__pycache__/
+
+# GN out directory
+android/out/
+
+# Nested checkout
+src/chromiumos/tast/remote/firmware/data/fw-testing-configs/
+
+# Intelij
+.idea
+
+# Gopls language server
+gopls

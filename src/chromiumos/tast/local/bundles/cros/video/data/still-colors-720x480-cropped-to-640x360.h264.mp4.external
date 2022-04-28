@@ -1,0 +1,5 @@
+{
+  "url": "gs://chromiumos-test-assets-public/tast/cros/video/still-colors-720x480-cropped-to-640x360_20200827.h264.mp4",
+  "size": 17005,
+  "sha256sum": "439ff4ba419d56316d923006807333de84d2ed70bc6bc5dfcce95998e221d314"
+}

@@ -1,0 +1,5 @@
+{
+  "sha256sum": "3c4676f38f85cf40905f93557d78a9dec1060a1f395c4049441b8c57903dcfe3",
+  "size": 97415,
+  "url": "gs://chromiumos-test-assets-public/tast/cros/video/perf/hevc/144p_30fps_300frames_20211020.hevc.mp4"
+}

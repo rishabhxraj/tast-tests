@@ -1,0 +1,5 @@
+{
+  "sha256sum": "a446062a321a06c52034938d87cc07bb5f69cd6ae6e7005d4b15b8284e8d0b34",
+  "size": 821024,
+  "url": "gs://chromiumos-test-assets-public/tast/cros/video/perf/vp8/720p_30fps_300frames_20211020.vp8.webm"
+}

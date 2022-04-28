@@ -1,0 +1,5 @@
+{
+  "url": "gs://chromiumos-test-assets-public/tast/cros/video/peru.8k.cut.hdr.vp9_20200603.webm",
+  "size": 1087050,
+  "sha256sum": "c89bbf15d8e79bc6824569ab5a5693c82118bb76c8bf36255fee37770ad21079"
+}
